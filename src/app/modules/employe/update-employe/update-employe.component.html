@@ -1,0 +1,15 @@
+<div class="container">
+
+    <form (ngSubmit)="updateEmploye()">
+        <div *ngIf="employe">
+            <div>
+                Nom : <input type="text" name="nom" [(ngModel)]="employe.nom" required>
+            </div>
+            <div>
+                Prenom : <input type="text" name="prenom" [(ngModel)]="employe.prenom" required>
+            </div>
+        </div>
+        <button type="submit">Envoyer</button>
+    </form>
+
+</div>

@@ -1,0 +1,219 @@
+<div class="container">
+    <h2>{{ title }} app is running!</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Nom : {{ personne.nom }}</li>
+      <li class="list-group-item">Prénom : {{ personne.prenom }}</li>
+      <li class="list-group-item">{{ personne }}</li>
+      <li class="list-group-item">{{ personne | json }}</li>
+      <li class="list-group-item">{{ direBonjour() }}</li>
+      <!-- pour afficher le contenu de l'attribut libelleFormation déclaré dans le code source .ts on peut utiliser l'interpolation -->
+      <li class="list-group-item">{{ libelleFormation }}</li>
+      <!-- on peut aussi utiliser le one-way binding en utilisant la propriétéJS textContent -->
+      <li class="list-group-item" [textContent]=libelleFormation></li>
+      <!-- ce code est trop répétitif -->
+      <li class="list-group-item">{{ tab[0] }}</li>
+      <li class="list-group-item">{{ tab[1] }}</li>
+      <li class="list-group-item">{{ tab[2] }}</li>
+      <li class="list-group-item">{{ tab[3] }}</li>
+      <!-- on peut plutôt utiliser la directive *ngFor qui nous permet de répéter un traitement-->
+      <!-- Ces directives s'utilisent avec les composants web : ng-container et ng-template -->
+      <li class="list-group-item">
+        <ul>
+          <li *ngFor="let elt of tab" class="list-group-item">{{elt}}</li>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <ul>
+          <li *ngFor="let elt of tab; let i = index" class="list-group-item">
+            <!-- ou 'index as i' au lieu de 'let i=index' -->
+            {{i}} : {{elt}}
+          </li>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <ul>
+          <li *ngFor="let elt of tab; let i = index; let isFirst = first; let isLast = last" class="list-group-item">
+            {{i}} : {{elt}} : {{isFirst}} : {{isLast}}
+          </li>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <ul>
+          <li *ngFor="let elt of tab; let i = index; let isEven = even; let isOdd = odd" class="list-group-item">
+            {{i}} : {{elt}} : {{isEven}} : {{isOdd}}
+          </li>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <ul>
+          <li *ngIf="tab[0] % 2!= 0" class="list-group-item">
+            {{tab[0]}} est impair
+          </li>
+        </ul>
+      </li>
+      <!-- Ecrire un code HTML en utilisant les directives angular qui permet d'afficher le premier élément
+        du tableau tab ainsi que sa parité -->
+      <li class="list-group-item">
+        <ul>
+          <li *ngIf="tab[0] % 2 != 0; then si else sinon" class="list-group-item">
+            Ce code ne sera jamais affiché
+          </li>
+          <ng-template #si>
+            <li class="list-group-item">
+              {{tab[0]}} est impair
+            </li>
+          </ng-template>
+          <ng-template #sinon>
+            <li class="list-group-item">
+              {{tab[0]}} est pair
+            </li>
+          </ng-template>
+        </ul>
+      </li>
+      <!-- Ecrire un code HTML en utilisant les directives angular qui permet d'afficher sous forme d'une liste 
+          chaque élément de tab ainsi que sa parité -->
+      <li class="list-group-item">
+        <ul>
+          <ng-container *ngFor="let elt of tab">
+            <li *ngIf="elt % 2 != 0; then si else sinon" class="list-group-item">
+              Ce code ne sera jamais affiché
+            </li>
+            <ng-template #si>
+              <li class="list-group-item">
+                {{elt}} est impair
+              </li>
+            </ng-template>
+            <ng-template #sinon>
+              <li class="list-group-item">
+                {{elt}} est pair
+              </li>
+            </ng-template>
+          </ng-container>
+        </ul>
+      </li>
+      <!-- </ul> -->
+      <!-- Ecrire un code HTML en utilisant les directives angular qui permet d'afficher sous forme d'une liste
+        chaque élément de tab avec un message défini ainsi :
+        si val entre 0 et 9 : 'echec'
+        si val entre 10 et 13 : moyen
+        si val entre 14 et 16 : bien 
+        sinon : très bien-->
+      <li class="list-group-item">
+        <ul>
+          <ng-container *ngFor="let elt of tab">
+            <ng-container [ngSwitch]="true">
+              <li *ngSwitchCase="elt >= 0 && elt <= 9">
+                {{elt}} : échec
+              </li>
+              <li *ngSwitchCase="elt >= 10 && elt <= 13">
+                {{elt}} : moyen
+              </li>
+              <li *ngSwitchCase="elt >= 14 && elt <= 16">
+                {{elt}} : bien
+              </li>
+              <li *ngSwitchCase="elt > 16">
+                {{elt}} : très bien
+              </li>
+              <li *ngSwitchDefault>
+                autre
+              </li>
+            </ng-container>
+          </ng-container>
+        </ul>
+      </li>
+  
+      <!-- [ngStyle] permet de modifier le style à un élément html; s'utilise avec le property binding[]
+        pour récupérer des valeurs définies dans le code-behind -->
+      <li class="list-group-item">
+        <p [textContent]=nom [ngStyle]='{backgroundColor: couleur}'></p>
+      </li>
+      <li class="list-group-item">
+        <p [ngStyle]='{color: getColor(), backgroundColor: getBackgroundColor()}'>{{libelleFormation}}</p>
+      </li>
+      <!-- [ngClass] class du css-->
+      <li class="list-group-item">
+        <p [ngClass]="{'rouge': true}">
+          ngClass -> {{nom}}
+        </p>
+      </li>
+      <li class="list-group-item">
+        <p [ngClass]="{'rouge': nom == 'Doe'}">
+          ngClass + condition -> {{nom}}
+        </p>
+      </li>
+      <li class="list-group-item">
+        <p [ngClass]="{'rouge': nom == 'Doe', 'bleu': nom != 'Doe'}">
+          ngClass + condition avec alternative -> {{nom}}
+        </p>
+      </li>
+      <li class="list-group-item">
+        <p [ngClass]="nom == 'Doe' ? 'rouge' : 'bleu'">
+          ngClass + ternaire -> {{nom}}
+        </p>
+      </li>
+      <!-- utiliser ngClass dans un code html mettant en bleu les éléments pairs de tab et en rouge les impairs -->
+      <li class="list-group-item">
+        <ul>
+          <ng-container *ngFor="let elt of tab">
+              <li class="list-group-item" [ngClass]="elt % 2 != 0 ? 'rouge' : 'bleu'">
+                {{elt}} 
+              </li>
+          </ng-container>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <ul>
+          <ng-container *ngFor="let elt of tab">
+            <li *ngIf="elt % 2 != 0; then si else sinon" class="list-group-item">
+            </li>
+            <ng-template #si>
+              <li class="list-group-item" [ngClass]="{'rouge': true}">
+                {{elt}} est impair
+              </li>
+            </ng-template>
+            <ng-template #sinon>
+              <li class="list-group-item" [ngClass]="{'bleu': true}">
+                {{elt}} est pair
+              </li>
+            </ng-template>
+          </ng-container>
+        </ul>
+      </li>
+      <!-- Ecrire un script Angular qui permet d’afficher dans une liste HTML les
+    elements de la liste personne (on affiche que les nom et prenom). Les
+    elements d’indice pair seront affiches en rouge, les impairs en bleu. -->
+    <li class="list-group-item">
+      <ul>
+        <li *ngFor="let pers of personnes; let i = index" class="list-group-item" [ngClass]="i % 2 == 0 ? 'rouge' : 'bleu'">
+          {{pers.nom}} {{pers.prenom}}
+        </li>
+      </ul>
+    </li>
+    <li class="list-group-item">
+      <ul>
+        <ng-container *ngFor="let elt of personnes; let i = index;">
+          <li [ngClass]="i % 2 != 0 ? 'rouge' : 'bleu'">
+            {{ elt.nom + " " + elt.prenom }}
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+    <li class="list-group-item">
+      <ul>
+          <li>{{ "salut" | getChar }}</li>
+          <li>{{ "wick" | getChar }}</li>
+          <li>{{ "john" | getChar }}</li>
+          <br>
+          <li>{{ "salut" | getChar:4 }}</li>
+          <li>{{ "wick" | getChar:1 }}</li>
+          <li>{{ "john" | getChar }}</li>
+        </ul>
+    </li>
+    
+  
+  
+    </ul>
+  </div>
+  
+  <!-- <app-stagiaire></app-stagiaire>
+  <app-adresse></app-adresse> -->

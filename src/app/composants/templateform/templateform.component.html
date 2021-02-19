@@ -1,0 +1,61 @@
+<!-- Plusieurs formes de binding
+{{ interpolation }} : permet de recuperer la valeur d'un attribut declaree dans le .component.ts
+[ one way binding ] : permet aussi de recuperer la valeur d'un attribut declaree dans le .component.ts
+{{ interpolation }} est un raccourci de [ one way binding ]( event binding ) permet au .component.ts de
+recuperer des valeurs passees par le .component.html
+Il est possible de combiner one way binding et event bindingResultat : two way binding -> Un changement
+de valeur dans .component.ts sera apercu dans .component.html et un changement dans.component.html sera
+recu dans .component.ts Pour la liaison bidirectionnelle, il nous faut la propriete ngModel
+Pour pouvoir utiliser la propriete ngModel, il faut ajouter le module FormsModule dans app.module.ts -->
+<div class="container">
+    <h2>Formulaire</h2>
+    <form #monForm=ngForm (ngSubmit)=ajouterPersonne()>
+        <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input class="form-control" type="text" name="nom" [(ngModel)]="personne.nom" required #nom="ngModel">
+        </div>
+        <div [hidden]="nom.valid || nom.pristine">
+            Le nom est obligatoire
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prenom:</label>
+            <input class="form-control" type="text" name="prenom" [(ngModel)]="personne.prenom" required #prenom="ngModel">
+        </div>
+        <div [hidden]="prenom.valid || prenom.pristine">
+            Le prenom est obligatoire
+        </div>
+        <div>
+            <button class="btn btn-success"  [disabled]=!monForm.valid>
+                Ajouter
+            </button>
+        </div>
+    </form>
+</div>
+<div class="container" style="margin-top: 15px;">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let personne of personnes">
+            {{ personne.nom }} {{ personne.prenom }}
+            <button type="submit" class="btn btn-danger" (click)="supprimerPersonne(personne)">
+                supp
+            </button>
+        </li>
+        
+    </ul>
+</div>
+<br>
+
+exo 1 :
+<ul>
+    <li *ngFor="let elt of person | getArrayObject">
+    {{ elt[0] }} : {{ elt[1] }}
+    </li>
+</ul>
+<br>
+
+exo 2 :
+<ul>
+    <li *ngFor="let elt of tab | getSubArray : 3 : 6">
+        {{ elt }}
+    </li>
+</ul>
+

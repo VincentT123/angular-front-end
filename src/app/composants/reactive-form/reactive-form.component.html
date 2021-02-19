@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Reactive Formulaire</h1>
+        <p class="lead"></p>
+        <p class="lead"></p>
+        <p class="lead"></p>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <form [formGroup]="personneForm" (ngSubmit)="afficherTout()">
+                <div class="form-group">
+                    <label for="id">Id:</label>
+                    <input class="form-control" type="number" placeholder="Enter Id" name=id formControlName="id">
+                </div>
+                <div *ngIf="personneForm.controls['id'].invalid && (personneForm.controls['id'].dirty || 
+                personneForm.controls['id'].touched)" class="alert alert-danger">
+                    <div *ngIf="personneForm.controls['id'].errors?.required">
+                        L'identifiant est obligatoire
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Nom:</label>
+                    <input class="form-control" type="text" placeholder="Enter LastName" name=nom formControlName="nom">
+                </div>
+                <div *ngIf="personneForm.controls['nom'].invalid && (personneForm.controls['nom'].dirty || personneForm.controls['nom'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="personneForm.controls['nom'].errors?.required">
+                        Le nom est obligatoire
+                    </div>
+                    <div *ngIf="personneForm.controls['nom'].errors?.erreur">
+                        Premiere lettre en majuscule
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom:</label>
+                    <input class="form-control" type="text" placeholder="Enter FirstName" name=prenom
+                        formControlName="prenom">
+                </div>
+                <div *ngIf="personneForm.controls['prenom'].invalid && (personneForm.controls['prenom'].dirty || personneForm.controls['prenom'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="personneForm.controls['prenom'].errors?.required">
+                        Le prenom est obligatoire
+                    </div>
+                    <div *ngIf="personneForm.controls['prenom'].errors?.erreur">
+                        Premiere lettre en majuscule
+                    </div>
+                </div>
+                <div formGroupName="adresse">
+                    <h3>Adresse</h3>
+                    <div class="form-group">
+                        <label for="rue">Rue:</label>
+                        <input class="form-control" type="text" placeholder="Enter Street" name=rue
+                            formControlName="rue">
+                    </div>
+                    <div class="form-group">
+                        <label for="ville">Ville:</label>
+                        <input class="form-control" type="text" placeholder="Enter City" name=ville
+                            formControlName="ville">
+                    </div>
+                    <div class="form-group">
+                        <label for="codePostal">Code Postal:</label>
+                        <input class="form-control" type="text" placeholder="Enter ZipCode" name=codePostal
+                            formControlName="codePostal">
+                    </div>
+                </div>
+                <button class="btn btn-success" type="submit" [disabled]="!personneForm.valid">Envoyer</button>
+                <br>
+                <br>
+                <div formArrayName="sports">
+                    <h3 style="display: contents">Sports</h3>
+                    <button class="btn btn-primary" type="button" (click)="ajouterSport()">
+                        Ajouter Sport
+                    </button>
+                    <div *ngFor="let sport of sports.controls; let i = index;">
+                        <div class="form-group">
+                            <label for="sports">Sports</label>
+                            <input class="form-control" type="text" [formControlName]="i">
+                            <button class="btn btn-danger" type="button" (click)="supprimerSport(i)">
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm">
+            <div *ngFor="let personne of personnes;">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Rue</th>
+                            <th scope="col">Ville</th>
+                            <th scope="col">Code Postal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ personne.id }}</td>
+                            <td>{{ personne.nom }}</td>
+                            <td>{{ personne.prenom }}</td>
+                            <td>{{ personne.adresse.rue }}</td>
+                            <td>{{ personne.adresse.ville }}</td>
+                            <td>{{ personne.adresse.codePostal }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="list-group">
+                    <ng-container *ngFor="let elt of personne.sports; let i = index;">
+                    <li class="list-group-item">
+                        {{ elt }} 
+                    </li>
+                    </ng-container>
+                </ul>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

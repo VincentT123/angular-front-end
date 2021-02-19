@@ -1,0 +1,37 @@
+<div class="container">
+
+    <form #personneForm=ngForm (ngSubmit)="savePerson()">
+        <div>
+            nom : <input type="text" name="nom" placeholder="Entrer le nom" [(ngModel)]="personne.nom" #nom="ngModel">
+        </div>
+        <div>
+            prénom : <input type="text" name="prenom" placeholder="Entrer le prénom" [(ngModel)]="personne.prenom" #prenom="ngModel">
+        </div>
+        <div>
+            <button class="btn btn-success" [disabled]=!personneForm.valid>
+                Ajouter
+            </button>
+        </div>
+    </form>
+    <br><br>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <ul>
+                <li *ngFor="let elt of personnes" class="list-group-item">
+                    {{elt.nom}} {{elt.prenom}}
+                    <button (click)="deletePerson(elt.id)">
+                        Supprimer
+                    </button>
+                    <button (click)="updatePerson(elt.id)">
+                        Editer
+                    </button>
+                    <button (click)="personDetail(elt.id)">
+                        Détails
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>

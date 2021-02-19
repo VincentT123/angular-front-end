@@ -1,0 +1,26 @@
+<!-- Creez un composant calculette (n'oubliez pas de lui associer une route calculette). Dans
+calculette.component.html definissez deux champs input de type number et quatre boutons :
+un pour chaque operation arithmetique. Le resultat sera affiche en-dessous du formulaire. -->
+<div class="shade">
+	<div class="blackboard">
+		<div class="form">
+			<p>
+				<label>Num 1: </label>
+				<input [(ngModel)]='num1' type="number" name="num1">
+			</p>
+			<p>
+				<label>Num 2: </label>
+				<input [(ngModel)]='num2' type="number" name="num2">
+			</p>
+			<p class="wipeout" style="font-size:10px">
+				<input type="button" value="Sum" (click)='sum()' />
+				<input type="button" value="Diff" (click)='diff()' />
+				<input type="button" value="Mult" (click)='mult()' />
+				<input type="button" value="Div" (click)='div()' />
+			</p>
+			<p>
+				<label>Resultat: {{result}}</label>
+			</p>
+		</div>
+	</div>
+</div>
