@@ -1,11 +1,14 @@
 <div class="container">
 
+    <br>
     <form #personneForm=ngForm (ngSubmit)="savePerson()">
-        <div>
-            nom : <input type="text" name="nom" placeholder="Entrer le nom" [(ngModel)]="personne.nom" #nom="ngModel">
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Entrer le nom" [(ngModel)]="personne.nom" #nom="ngModel" class="form-control">
         </div>
-        <div>
-            prénom : <input type="text" name="prenom" placeholder="Entrer le prénom" [(ngModel)]="personne.prenom" #prenom="ngModel">
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Entrer le prénom" [(ngModel)]="personne.prenom" #prenom="ngModel" class="form-control">
         </div>
         <div>
             <button class="btn btn-success" [disabled]=!personneForm.valid>
@@ -14,24 +17,22 @@
         </div>
     </form>
     <br><br>
+    
+    <ul class="list-group">
 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <ul>
-                <li *ngFor="let elt of personnes" class="list-group-item">
-                    {{elt.nom}} {{elt.prenom}}
-                    <button (click)="deletePerson(elt.id)">
-                        Supprimer
-                    </button>
-                    <button (click)="updatePerson(elt.id)">
-                        Editer
-                    </button>
-                    <button (click)="personDetail(elt.id)">
-                        Détails
-                    </button>
-                </li>
-            </ul>
+        <li *ngFor="let elt of personnes" class="list-group-item">
+            {{elt.nom}} {{elt.prenom}}
+            <button (click)="deletePerson(elt.id)" class="btn btn-outline-secondary btn-sm">
+                Supprimer
+            </button>
+            <button (click)="updatePerson(elt.id)" class="btn btn-outline-secondary btn-sm">
+                Editer
+            </button>
+            <button (click)="personDetail(elt.id)" class="btn btn-outline-secondary btn-sm">
+                Détails
+            </button>
         </li>
+
     </ul>
 
 </div>

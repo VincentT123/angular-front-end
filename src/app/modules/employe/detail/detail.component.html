@@ -1,18 +1,23 @@
 <div class="container">
 
-    <div>
-        Id : {{employe._id}}
+    <br>
+    <div class="col-4">
+        <div class="list-group">
+            <div class="list-group-item">
+                Id : {{employe._id}}
+            </div>
+            <div class="list-group-item">
+                Nom : {{employe.nom}}
+            </div>
+            <div class="list-group-item">
+                Prenom : {{employe.prenom}}
+            </div>
+            <div class="list-group-item">
+                Status : {{employe.status}}
+            </div>
+        </div>
+        <br>
+        <button (click)="retour()" class="btn btn-secondary">Retour</button>
     </div>
-    <div>
-        Nom : {{employe.nom}}
-    </div>
-    <div>
-        Prenom : {{employe.prenom}}
-    </div>
-    <div>
-        Status : {{employe.status}}
-    </div>
-    
-    <button (click)="retour()">Retour</button>
 
 </div>
