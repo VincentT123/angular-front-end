@@ -22,13 +22,13 @@
 
         <li *ngFor="let elt of personnes" class="list-group-item">
             {{elt.nom}} {{elt.prenom}}
-            <button (click)="deletePerson(elt.id)" class="btn btn-outline-secondary btn-sm">
+            <button (click)="deletePerson(elt.id)" class="btn btn-outline-primary btn-sm">
                 Supprimer
             </button>
-            <button (click)="updatePerson(elt.id)" class="btn btn-outline-secondary btn-sm">
+            <button (click)="updatePerson(elt.id)" class="btn btn-outline-primary btn-sm">
                 Editer
             </button>
-            <button (click)="personDetail(elt.id)" class="btn btn-outline-secondary btn-sm">
+            <button (click)="personDetail(elt.id)" class="btn btn-outline-primary btn-sm">
                 Détails
             </button>
         </li>

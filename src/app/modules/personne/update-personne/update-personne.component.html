@@ -1,17 +1,20 @@
 <div class="container">
 
+    <br>
     <form (ngSubmit)="updatePerson()">
-        <div>
-            Id : <input type="text" name="id" [(ngModel)]="personne.id" required>
+        <div class="mb-3">
+            <label for="id" class="form-label">Id</label>
+            <input type="text" id="id" name="id" [(ngModel)]="personne.id" class="form-control" required>
         </div>
-        <div>
-            Nom : <input type="text" name="nom" [(ngModel)]="personne.nom" required>
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" id="nom" name="nom" [(ngModel)]="personne.nom" class="form-control" required>
         </div>
-        <div>
-            Prenom : <input type="text" name="prenom" [(ngModel)]="personne.prenom" required>
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prenom</label>
+            <input type="text" id="prenom" name="prenom" [(ngModel)]="personne.prenom" class="form-control" required>
         </div>
-        
-        <button type="submit">Envoyer</button>
+        <button class="btn btn-success" type="submit">Envoyer</button>
     </form>
 
 </div>

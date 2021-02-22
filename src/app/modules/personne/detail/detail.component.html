@@ -1,15 +1,20 @@
 <div class="container">
 
-    <div>
-        Id : {{personne.id}}
+    <br>
+    <div class="col-4">
+        <div class="list-group">
+            <div class="list-group-item">
+                Id : {{personne.id}}
+            </div>
+            <div class="list-group-item">
+                Nom : {{personne.nom}}
+            </div>
+            <div class="list-group-item">
+                Prenom : {{personne.prenom}}
+            </div>
+        </div>
+        <br>
+        <button (click)="retour()" class="btn btn-secondary">Retour</button>
     </div>
-    <div>
-        Nom : {{personne.nom}}
-    </div>
-    <div>
-        Prenom : {{personne.prenom}}
-    </div>
-    
-    <button (click)="retour()">Retour</button>
 
 </div>

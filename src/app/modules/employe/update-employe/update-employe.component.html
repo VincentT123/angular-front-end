@@ -1,14 +1,15 @@
 <div class="container">
 
+    <br>
     <form (ngSubmit)="updateEmploye()">
         <div *ngIf="employe" class="mb-3">
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
-                <input type="text" id="nom" name="nom" [(ngModel)]="employe.nom" required>
+                <input type="text" id="nom" name="nom" [(ngModel)]="employe.nom" class="form-control" required>
             </div>
             <div class="mb-3"> 
                 <label for="prenom" class="form-label">Prenom</label>
-                <input type="text" id="prenom" name="prenom" [(ngModel)]="employe.prenom" required>
+                <input type="text" id="prenom" name="prenom" [(ngModel)]="employe.prenom" class="form-control" required>
             </div>
         </div>
         <button class="btn btn-success" type="submit">Envoyer</button>
